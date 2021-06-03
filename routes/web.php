@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\Seller;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::group(['middleware' => ['admin', 'auth'], 'prefix' => 'backend/', 'as' =>
     Route::get('/dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', Admin\ProductController::class);
     Route::resource('orders', Admin\OrderController::class);
+});
+
+//Seller Routes
+Route::group(['middleware' => ['seller', 'auth'], 'prefix' => 'backend/', 'as' => 'seller.'], function(){
+    Route::get('/dashboard', [Seller\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('products', Seller\ProductController::class);
+    Route::resource('orders', Seller\OrderController::class);
 });
 
 Route::get('/dashboard', function(){

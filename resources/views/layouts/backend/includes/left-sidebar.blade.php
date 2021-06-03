@@ -25,6 +25,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
+                @if(auth()->user()->type == 'Admin')
                 <li>
                     <a class="waves-effect waves-dark" href="{{ route('admin.dashboard') }}">
                         <i class="far fa-circle text-success"></i><span class="hide-menu">Dashboard</span>
@@ -47,6 +48,32 @@
                         <i class="far fa-circle text-success"></i><span class="hide-menu">Orders</span>
                     </a>
                 </li>
+                @endif
+                    @if(auth()->user()->type == 'Seller')
+                        <li>
+                            <a class="waves-effect waves-dark" href="{{ route('seller.dashboard') }}">
+                                <i class="far fa-circle text-success"></i><span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="far fa-circle text-success"></i>
+                                <span class="hide-menu">
+                            Products
+                        </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('seller.products.index') }}">List </a></li>
+                                <li><a href="{{ route('seller.products.create') }}">Create new</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="{{ route('seller.orders.index') }}">
+                                <i class="far fa-circle text-success"></i><span class="hide-menu">Orders</span>
+                            </a>
+                        </li>
+                    @endif
+
                 <br>
                 <br>
                 <br>
