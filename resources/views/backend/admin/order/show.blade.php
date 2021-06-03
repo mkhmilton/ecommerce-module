@@ -36,6 +36,7 @@
                             <table class="table product-overview">
                                 <thead>
                                 <tr>
+                                    <th>Seller</th>
                                     <th>Image</th>
                                     <th>Product name</th>
                                     <th>Price</th>
@@ -47,6 +48,7 @@
                                 @foreach($order->items->groupBy('product_id') as $item_orders)
                                     @foreach($item_orders as $item_order)
                                         <tr>
+                                            <td>{{ $item_order->product->seller->name ?? '' }}</td>
                                             <td width="150"><img src="{{ asset($item_order->product->image ?? 'uploads/images/no-image.jpg') }}" alt="iMac" width="80"></td>
                                             <td width="550">
                                                 <h5 class="font-500 text-danger">{{ $item_order->product->name }}</h5>
