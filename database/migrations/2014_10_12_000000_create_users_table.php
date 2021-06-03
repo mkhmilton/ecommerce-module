@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->boolean('admin')->default(false)->comment('1:Admin | 0:Customer');
+            $table->string('type')->default('Customer')->comment('Admin | Seller | Customer');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

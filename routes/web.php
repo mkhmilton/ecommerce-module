@@ -30,7 +30,7 @@ Route::group(['middleware' => ['admin', 'auth'], 'prefix' => 'backend/', 'as' =>
 });
 
 Route::get('/dashboard', function(){
-    if (auth()->user()->admin)
+    if (auth()->user()->type == 'Admin')
         return redirect()->route('admin.dashboard');
     return redirect()->route('index');
 });
