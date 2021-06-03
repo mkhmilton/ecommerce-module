@@ -26,11 +26,13 @@ class ProductController extends Controller
             return datatables::of($data)
                 ->addColumn('image', function($data) {
                     return '<img class="rounded-circle" height="70px;" src="'.asset($data->image ?? 'uploads/images/no-image.jpg').'" width="70px;" class="rounded-circle" />';
+                })->addColumn('seller', function($data) {
+                    return $data->seller->name ?? '';
                 })->addColumn('action', function($data) {
                     return '<a href="'.route('admin.products.edit', $data).'" class="btn btn-info"><i class="fa fa-edit"></i> </a>
                     <button class="btn btn-danger" onclick="delete_function(this)" value="'.route('admin.products.destroy', $data).'"><i class="fa fa-trash"></i> </button>';
                 })
-                ->rawColumns(['image','action'])
+                ->rawColumns(['image','seller','action'])
                 ->make(true);
         }else{
         $products = Product::orderBy('id', 'desc')->get();

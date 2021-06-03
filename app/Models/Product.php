@@ -14,10 +14,15 @@ class Product extends Model
         'image',
         'price',
         'quantity',
+        'seller_id',
     ];
 
     public function orders(){
         return $this->hasMany(OrderItem::class, 'product_id', 'id');
+    }
+
+    public function seller(){
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 
     // if product is deleted than auto delete depended data

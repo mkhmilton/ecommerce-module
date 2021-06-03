@@ -71,6 +71,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Image</th>
+                                            <th>Seller</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -84,6 +85,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Image</th>
+                                            <th>Seller</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -112,15 +114,20 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                bAutoWidth: false,
                 ajax: '{!! route('admin.products.index') !!}',
                 columns: [
                     {
                         data: 'id',
-                        name: 'id'
+                        name: 'id',
                     },
                     {
                         data: 'image',
                         name: 'image'
+                    },
+                    {
+                        data: 'seller',
+                        name: 'seller'
                     },
                     {
                         data: 'name',
