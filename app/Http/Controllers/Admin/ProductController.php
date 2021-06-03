@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -33,7 +34,7 @@ class ProductController extends Controller
                 ->make(true);
         }else{
         $products = Product::orderBy('id', 'desc')->get();
-        return view('backend.product.index', compact('products'));
+        return view('backend.admin.product.index', compact('products'));
         }
     }
 
@@ -44,7 +45,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.product.create');
+        $sellers = User::where('type', 'Seller')->get();
+        return view('backend.admin.product.create', compact('sellers'));
     }
 
     /**
@@ -60,12 +62,14 @@ class ProductController extends Controller
             'price'     => 'required|numeric',
             'quantity'  => 'required|numeric',
             'image'     => 'nullable|image',
+            'seller'     => 'required|exists:users,id',
         ]);
 
         $product = new Product();
         $product->name      =   $request->name;
         $product->price     =   $request->price;
         $product->quantity  =   $request->quantity;
+        $product->seller_id  =   $request->seller;
         if($request->hasFile('image')){
             $image             = $request->file('image');
             $folder_path       = 'uploads/images/';
@@ -104,7 +108,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('backend.product.edit', compact('product'));
+        $sellers = User::where('type', 'Seller')->get();
+        return view('backend.admin.product.edit', compact('product', 'sellers'));
     }
 
     /**
@@ -121,11 +126,13 @@ class ProductController extends Controller
             'price'     => 'required|numeric',
             'quantity'  => 'required|numeric',
             'image'     => 'nullable|image',
+            'seller'     => 'required|exists:users,id',
         ]);
 
         $product->name      =   $request->name;
         $product->price     =   $request->price;
         $product->quantity  =   $request->quantity;
+        $product->seller_id  =   $request->seller;
         if($request->hasFile('image')){
             if ($product->image != null)
                 File::delete(public_path($product->image));

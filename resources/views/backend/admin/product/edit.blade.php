@@ -1,5 +1,5 @@
 @extends('layouts.backend.app')
-@push('title') Create Product @endpush
+@push('title') Edit Product @endpush
 @push('style')
 
 @endpush
@@ -26,17 +26,18 @@
         <div class="row">
             <div class="card m-b-30 col-12 ">
                 <div class="card-header bg-danger">
-                    <h5 class="card-title text-white">Create new</h5>
+                    <h5 class="card-title text-white">Edit</h5>
                 </div>
                 <div class="card-body">
-                    <form class="row justify-content-center" method="POST" action="{{ route('admin.products.store') }}"
+                    <form class="row justify-content-center" method="POST" action="{{ route('admin.products.update', $product) }}"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PATCH')
                         <div class="col-lg-10">
                             <div class="form-group row">
                                 <div class="col-lg-6 col-xl-6 mb-2">
                                     <label for="name" class="col-sm-4 col-form-label">Product name</label>
-                                    <input name="name" type="text" class="form-control" id="name" value="{{ old('name') }}" required>
+                                    <input name="name" type="text" class="form-control" id="name" value="{{ $product->name }}" required>
                                     @error('name')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
@@ -45,7 +46,7 @@
                                 </div>
                                 <div class="col-lg-6 col-xl-6 mb-2">
                                     <label for="price" class="col-sm-4 col-form-label">Product price</label>
-                                    <input name="price" type="text" class="form-control" id="price" value="{{ old('price') }}" required>
+                                    <input name="price" type="text" class="form-control" id="price" value="{{ $product->price }}" required>
                                     @error('price')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
@@ -54,7 +55,7 @@
                                 </div>
                                 <div class="col-lg-6 col-xl-6 mb-2">
                                     <label for="quantity" class="col-sm-4 col-form-label">Product quantity</label>
-                                    <input name="quantity" type="text" class="form-control" id="quantity" value="{{ old('quantity') }}" required>
+                                    <input name="quantity" type="text" class="form-control" id="quantity" value="{{ $product->quantity }}" required>
                                     @error('quantity')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
@@ -63,8 +64,23 @@
                                 </div>
                                 <div class="col-lg-6 col-xl-6 mb-2">
                                     <label for="image" class="col-sm-4 col-form-label">Product image</label>
-                                    <input name="image" type="file" class="form-control" id="image" accept="image/*">
+                                    <img class="rounded-circle" style="max-width: 100px" src="{{ asset($product->image ?? 'uploads/images/no-image.jpg') }}">
+                                    <input name="image" type="file" class="form-control" id="image" value="">
                                     @error('image')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 col-xl-6 mb-2">
+                                    <label for="seller" class="col-sm-4 col-form-label">Seller</label>
+                                    <select class="form-control custom-select" id="seller" name="seller">
+                                        <option value="">--Select product seller--</option>
+                                        @foreach($sellers as $seller)
+                                            <option value="{{ $seller->id }}" @if($product->seller_id == $seller->id) selected @endif>{{ $seller->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('seller')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
                                     </div>
@@ -72,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn waves-effect waves-light btn-lg btn-primary"> Add new Product </button>
+                                <button type="submit" class="btn waves-effect waves-light btn-lg btn-primary"> Update Product </button>
                             </div>
                         </div>
                     </form>

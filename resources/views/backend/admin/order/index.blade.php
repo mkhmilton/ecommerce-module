@@ -98,17 +98,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="col-8 mb-2">
-                                                <a href="{{ route('admin.orders.show', $order) }}" type="button"
-                                                   class="btn waves-effect waves-light btn-block btn-info">Show {{ $order->items->count() }}</a>
-                                            </div>
-                                            <div class="col-8">
-                                                <button type="button"
-                                                        class="btn waves-effect waves-light btn-block btn-primary"
-                                                        onclick="delete_function(this)"
-                                                        value="{{ route('admin.orders.destroy', $order) }}">Delete
-                                                </button>
-                                            </div>
+                                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-info btn-circle"><i class="mdi mdi-eye"></i> </a>
+                                            <button type="button" class="btn btn-primary btn-circle"  onclick="delete_function(this)"
+                                                    value="{{ route('admin.orders.destroy', $order) }}"><i class="mdi mdi-delete"></i> </button>
                                         </td>
                                     </tr>
                                 @endforeach
