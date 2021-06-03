@@ -31,7 +31,7 @@ Route::group(['middleware' => ['admin', 'auth'], 'prefix' => 'backend/', 'as' =>
 });
 
 //Seller Routes
-Route::group(['middleware' => ['seller', 'auth'], 'prefix' => 'backend/', 'as' => 'seller.'], function(){
+Route::group(['middleware' => ['seller', 'auth'], 'prefix' => 'seller/', 'as' => 'seller.'], function(){
     Route::get('/dashboard', [Seller\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', Seller\ProductController::class);
     Route::resource('orders', Seller\OrderController::class);
