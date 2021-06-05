@@ -12,10 +12,10 @@
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('seller.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Product</li>
                 </ol>
-                <a href="{{ route('admin.products.create') }}" class="btn btn-info d-none d-lg-block m-l-15"><i
+                <a href="{{ route('seller.products.create') }}" class="btn btn-info d-none d-lg-block m-l-15"><i
                         class="fa fa-folder-open"></i> &nbsp; Create </a>
             </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="col-md-6 col-lg-4 col-xlg-2">
                 <div class="card">
                     <div class="box bg-dark text-center">
-                        <h1 class="font-light text-white">{{ $products->count() }}</h1>
+                        <h1 class="font-light text-white">{{ $products->where('seller_id',Auth::id())->count() }}</h1>
                         <h6 class="text-white">Total Products</h6>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
             <div class="col-md-6 col-lg-4 col-xlg-2">
                 <div class="card">
                     <div class="box bg-megna text-center">
-                        <h1 class="font-light text-white">{{ $products->sum('price') }}</h1>
+                        <h1 class="font-light text-white">{{ $products->where('seller_id',Auth::id())->sum('price') }}</h1>
                         <h6 class="text-white">Products of BDT</h6>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             <div class="col-md-6 col-lg-4 col-xlg-2">
                 <div class="card">
                     <div class="box bg-warning text-center">
-                        <h1 class="font-light text-white">{{ $products->sum('quantity') }}</h1>
+                        <h1 class="font-light text-white">{{ $products->where('seller_id',Auth::id())->sum('quantity') }}</h1>
                         <h6 class="text-white">Total Quantity</h6>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Image</th>
-                                            <th>Seller</th>
+                                            
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -85,7 +85,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Image</th>
-                                            <th>Seller</th>
+                                            
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -115,7 +115,7 @@
                 processing: true,
                 serverSide: true,
                 bAutoWidth: false,
-                ajax: '{!! route('admin.products.index') !!}',
+                ajax: '{!! route('seller.products.index') !!}',
                 columns: [
                     {
                         data: 'id',
@@ -125,10 +125,7 @@
                         data: 'image',
                         name: 'image'
                     },
-                    {
-                        data: 'seller',
-                        name: 'seller'
-                    },
+                    
                     {
                         data: 'name',
                         name: 'name'

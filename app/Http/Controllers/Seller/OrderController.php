@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('id', 'desc')->get();
+        // $orders = Order::orderBy('id', 'desc')->where('seller_id', auth()->user()->id)->get(); 
+        $orders = Order::orderBy('id', 'desc')->get(); //this process for current authentic use targeted action 
         return view('backend.seller.order.index', compact('orders'));
     }
 
@@ -48,6 +49,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        //Please here use a if condition for security
         return view('backend.seller.order.show', compact('order'));
     }
 

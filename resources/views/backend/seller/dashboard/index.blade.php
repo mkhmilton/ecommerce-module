@@ -30,7 +30,7 @@
                 </div>
             </div> -->
 
-            <div class="col-lg-3 col-md-6">
+            <!-- <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="d-flex flex-row">
                         <div class="p-10 bg-primary">
@@ -40,7 +40,7 @@
                             <h5 class="text-muted m-b-0">Seller</h5></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- <div class="col-lg-3 col-md-6">
                 <div class="card">

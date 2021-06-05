@@ -11,7 +11,7 @@
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('seller.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Orders</li>
                 </ol>
             </div>
@@ -98,9 +98,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-info btn-circle"><i class="mdi mdi-eye"></i> </a>
+                                            <a href="{{ route('seller.orders.show', $order) }}" class="btn btn-info btn-circle"><i class="mdi mdi-eye"></i> </a>
                                             <button type="button" class="btn btn-primary btn-circle"  onclick="delete_function(this)"
-                                                    value="{{ route('admin.orders.destroy', $order) }}"><i class="mdi mdi-delete"></i> </button>
+                                                    value="{{ route('seller.orders.destroy', $order) }}"><i class="mdi mdi-delete"></i> </button>
                                         </td>
                                     </tr>
                                 @endforeach

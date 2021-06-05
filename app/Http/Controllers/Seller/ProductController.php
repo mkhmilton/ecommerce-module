@@ -22,13 +22,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()){
-            $data = Product::orderBy('id', 'desc')->get();
+            $data = Product::orderBy('id', 'desc')->where('seller_id', auth()->user()->id)->get();
             return datatables::of($data)
                 ->addColumn('image', function($data) {
                     return '<img class="rounded-circle" height="70px;" src="'.asset($data->image ?? 'uploads/images/no-image.jpg').'" width="70px;" class="rounded-circle" />';
                 })->addColumn('action', function($data) {
-                    return '<a href="'.route('admin.products.edit', $data).'" class="btn btn-info"><i class="fa fa-edit"></i> </a>
-                    <button class="btn btn-danger" onclick="delete_function(this)" value="'.route('admin.products.destroy', $data).'"><i class="fa fa-trash"></i> </button>';
+                    return '<a href="'.route('seller.products.edit', $data).'" class="btn btn-info"><i class="fa fa-edit"></i> </a>
+                    <button class="btn btn-danger" onclick="delete_function(this)" value="'.route('seller.products.destroy', $data).'"><i class="fa fa-trash"></i> </button>';
                 })
                 ->rawColumns(['image','action'])
                 ->make(true);
@@ -63,6 +63,7 @@ class ProductController extends Controller
             'quantity'  => 'required|numeric',
             'image'     => 'nullable|image',
             'seller'     => 'required|exists:users,id',
+            
         ]);
 
         $product = new Product();
@@ -70,6 +71,7 @@ class ProductController extends Controller
         $product->price     =   $request->price;
         $product->quantity  =   $request->quantity;
         $product->seller_id  =   $request->seller;
+        
         if($request->hasFile('image')){
             $image             = $request->file('image');
             $folder_path       = 'uploads/images/';

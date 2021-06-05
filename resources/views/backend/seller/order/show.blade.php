@@ -45,7 +45,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order->items->groupBy('product_id') as $item_orders)
+                                @foreach($order->items()->where('seller_id', auth()->user()->id)->groupBy('product_id') as $item_orders)
                                     @foreach($item_orders as $item_order)
                                         <tr>
                                             <td>{{ $item_order->product->seller->name ?? '' }}</td>
@@ -119,7 +119,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'PATCH',
-                            url: '{{ route('admin.orders.update', $order) }}',
+                            url: '{{ route('seller.orders.update', $order) }}',
                             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                             processData: false,
                             contentType: false,

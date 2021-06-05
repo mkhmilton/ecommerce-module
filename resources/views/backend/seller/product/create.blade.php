@@ -11,10 +11,10 @@
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('seller.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Product</li>
                 </ol>
-                <a href="{{ route('admin.products.index') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-folder-open"></i>  &nbsp; Back to List </a>
+                <a href="{{ route('seller.products.index') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-folder-open"></i>  &nbsp; Back to List </a>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                     <h5 class="card-title text-white">Create new</h5>
                 </div>
                 <div class="card-body">
-                    <form class="row justify-content-center" method="POST" action="{{ route('admin.products.store') }}"
+                    <form class="row justify-content-center" method="POST" action="{{ route('seller.products.store') }}"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="col-lg-10">
@@ -70,20 +70,19 @@
                                     </div>
                                     @enderror
                                 </div>
+
                                 <div class="col-lg-6 col-xl-6 mb-2">
-                                    <label for="seller" class="col-sm-4 col-form-label">Seller</label>
-                                    <select class="form-control custom-select" id="seller" name="seller">
-                                        <option selected value="">--Select seller ID--</option>
-                                        @foreach($sellers as $seller)
-                                        <option value="{{ $seller->id }}">{{ $seller->id }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="seller" class="col-sm-4 col-form-label">Seller ID =</label>
+                                    <label for="seller" class="">{{Auth::id() }}</label>
+                                   
+                                    
                                     @error('seller')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
                                     </div>
                                     @enderror
                                 </div>
+                                
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn waves-effect waves-light btn-lg btn-primary"> Add new Product </button>
